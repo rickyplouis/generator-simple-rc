@@ -1,0 +1,9 @@
+{
+  "generator-node": {
+    "promptValues": {
+      "authorName": "Ricardo",
+      "authorEmail": "ricardoplouis@gmail.com",
+      "authorUrl": "https://github.com/rickyplouis"
+    }
+  }
+}
