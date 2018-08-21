@@ -12,10 +12,17 @@ module.exports = class extends Generator {
 
     const prompts = [
       {
-        type: 'confirm',
-        name: 'someAnswer',
-        message: 'Would you like to enable this option?',
-        default: true
+        type: 'input',
+        name: 'componentName',
+        message: 'What is the name of your component?',
+        default: 'Test'
+      },
+      {
+        type: 'list',
+        name: 'componentType',
+        message: 'What type of component would you like?',
+        default: 'class',
+        choices: ['class', 'functional']
       }
     ];
 
@@ -26,13 +33,10 @@ module.exports = class extends Generator {
   }
 
   writing() {
-    this.fs.copy(
-      this.templatePath('dummyfile.txt'),
-      this.destinationPath('dummyfile.txt')
+    this.fs.copyTpl(
+      this.templatePath(this.props.componentType + '.js'),
+      this.destinationPath(this.props.componentName + '.js'),
+      { componentName: this.props.componentName }
     );
-  }
-
-  install() {
-    this.installDependencies();
   }
 };
