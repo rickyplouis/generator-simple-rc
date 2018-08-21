@@ -7,10 +7,10 @@ describe('generator-simple-rc:app', () => {
   beforeAll(() => {
     return helpers
       .run(path.join(__dirname, '../generators/app'))
-      .withPrompts({ someAnswer: true });
+      .withPrompts({ componentName: 'Test', componentType: 'class' });
   });
 
   it('creates files', () => {
-    assert.file(['dummyfile.txt']);
+    assert.file(['Test.js']);
   });
 });
