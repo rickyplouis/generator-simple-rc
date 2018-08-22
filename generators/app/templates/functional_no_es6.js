@@ -1,5 +1,5 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+var React = require('react');
+var ReactDOM = require('react-dom');
 <% if(jsx){ %>
   function Welcome(props) {
     return <h1>Hello from, {props.title}</h1>;
@@ -42,10 +42,3 @@ ReactDOM.render(
   document.getElementById('root')
 );
 <% } %>
-Welcome.propTypes = {
-  title: PropTypes.string,
-};
-
-Welcome.defaultProps = {
-  title: 'Some Title',
-};
