@@ -74,8 +74,13 @@ module.exports = class extends Generator {
   }
 
   writing() {
+    const templateName =
+      this.props.linter === 'none'
+        ? this.props.componentType + '.js'
+        : this.props.linter + '_' + this.props.componentType + '.js';
+
     this.fs.copyTpl(
-      this.templatePath(this.props.componentType + '.js'),
+      this.templatePath(templateName),
       this.destinationPath(this.props.componentName + '.js'),
       { componentName: this.props.componentName, jsx: this.props.jsx }
     );
