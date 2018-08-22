@@ -1,7 +1,5 @@
 'use strict';
 const Generator = require('yeoman-generator');
-const chalk = require('chalk');
-const yosay = require('yosay');
 
 const formatName = componentName =>
   componentName
@@ -16,8 +14,8 @@ module.exports = class extends Generator {
     this.argument('templateName', { type: String, required: false });
 
     this.option('test');
-    this.option('--no-jsx');
-    this.option('--no-es6');
+    this.option('noJSX');
+    this.option('noES6');
     // This makes `appname` a required argument.
     const prompts = [
       {
@@ -45,7 +43,7 @@ module.exports = class extends Generator {
           return response.linter === 'none';
         },
         type: 'confirm',
-        name: 'jsx',
+        name: 'JSX',
         message: 'Use jsx?',
         default: true
       },
@@ -54,7 +52,7 @@ module.exports = class extends Generator {
           return response.linter === 'none';
         },
         type: 'confirm',
-        name: 'es6',
+        name: 'ES6',
         message: 'Use es6?',
         default: true
       }
@@ -63,7 +61,7 @@ module.exports = class extends Generator {
       return this.fs.copyTpl(
         this.templatePath('airbnb_class.js'),
         this.destinationPath('Test.js'),
-        { componentName: 'Test', jsx: true, es6: true }
+        { componentName: 'Test', jsx: !this.props.noJSX }
       );
     }
     return this.prompt(prompts).then(props => {
@@ -78,19 +76,20 @@ module.exports = class extends Generator {
     this.log('options.templateName' + this.options.templateName);
     if (!this.options.templateName) {
       const templateName =
-      this.props.linter === 'none'
-      ? this.props.componentType + '.js'
-      : this.props.linter + '_' + this.props.componentType + '.js';
+        this.props.linter === 'none'
+          ? this.props.componentType + '.js'
+          : this.props.linter + '_' + this.props.componentType + '.js';
 
       const componentName =
-      typeof this.props.componentName === 'string' && this.props.componentName.length > 0
-      ? formatName(this.props.componentName)
-      : 'TestComponent';
+        typeof this.props.componentName === 'string' &&
+        this.props.componentName.length > 0
+          ? formatName(this.props.componentName)
+          : 'TestComponent';
 
       this.fs.copyTpl(
         this.templatePath(templateName),
         this.destinationPath(componentName + '.js'),
-        { componentName: componentName, jsx: this.props.jsx, es6: this.props.es6 }
+        { componentName: componentName, jsx: this.props.JSX, es6: this.props.ES6 }
       );
     }
   }
