@@ -29,16 +29,7 @@ module.exports = class extends Generator {
         name: 'linter',
         message: 'What type of linter will it follow?',
         default: 'none',
-        choices: ['none', 'standard', 'airbnb', 'google']
-      },
-      {
-        when: function(response) {
-          return response.linter === 'none';
-        },
-        type: 'confirm',
-        name: 'es6',
-        message: 'Use es6?',
-        default: true
+        choices: ['none', 'airbnb']
       },
       {
         when: function(response) {
@@ -53,10 +44,11 @@ module.exports = class extends Generator {
         when: function(response) {
           return response.linter === 'none';
         },
-        type: 'confirm',
+        type: 'list',
         name: 'propTypes',
-        message: 'Use prop types?',
-        default: true
+        message: 'Method of type checking?',
+        default: 'none',
+        choices: ['none', 'propTypes', 'flow', 'typescript']
       },
       {
         type: 'confirm',
@@ -85,7 +77,7 @@ module.exports = class extends Generator {
     this.fs.copyTpl(
       this.templatePath(this.props.componentType + '.js'),
       this.destinationPath(this.props.componentName + '.js'),
-      { componentName: this.props.componentName }
+      { componentName: this.props.componentName, jsx: this.props.jsx }
     );
   }
 };
