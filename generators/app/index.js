@@ -77,19 +77,21 @@ module.exports = class extends Generator {
   }
 
   writing() {
-    const templateName =
+    if (!this.options.test) {
+      const templateName =
       this.props.linter === 'none'
-        ? this.props.componentType + '.js'
-        : this.props.linter + '_' + this.props.componentType + '.js';
+      ? this.props.componentType + '.js'
+      : this.props.linter + '_' + this.props.componentType + '.js';
 
-    const componentName =
+      const componentName =
       typeof this.props.componentName === 'string' && this.props.componentName.length > 0
-        ? formatName(this.props.componentName)
-        : 'TestComponent';
-    this.fs.copyTpl(
-      this.templatePath(templateName),
-      this.destinationPath(componentName + '.js'),
-      { componentName: componentName, jsx: this.props.jsx }
-    );
+      ? formatName(this.props.componentName)
+      : 'TestComponent';
+      this.fs.copyTpl(
+        this.templatePath(templateName),
+        this.destinationPath(componentName + '.js'),
+        { componentName: componentName, jsx: this.props.jsx }
+      );
+    }
   }
 };
