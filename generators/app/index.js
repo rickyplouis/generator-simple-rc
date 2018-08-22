@@ -18,6 +18,8 @@ module.exports = class extends Generator {
       yosay(`Welcome to the wonderful ${chalk.blue('generator-simple-rc')} generator!`)
     );
 
+    this.option('test');
+
     const prompts = [
       {
         type: 'input',
@@ -64,11 +66,14 @@ module.exports = class extends Generator {
         default: 'SimpleComponent'
       }
     ];
-
-    return this.prompt(prompts).then(props => {
-      // To access props later use this.props.someAnswer;
-      this.props = props;
-    });
+    if (this.options.test) {
+      this.log('well, i guess thats it');
+    } else {
+      return this.prompt(prompts).then(props => {
+        // To access props later use this.props.someAnswer;
+        this.props = props;
+      });
+    }
   }
 
   writing() {
