@@ -3,6 +3,14 @@ const Generator = require('yeoman-generator');
 const chalk = require('chalk');
 const yosay = require('yosay');
 
+const formatName = componentName =>
+  componentName
+    .trim()
+    .replace(/\s+/g, '')
+    .replace(/^\w/, function(char) {
+      return char.toUpperCase();
+    });
+
 module.exports = class extends Generator {
   prompting() {
     // Have Yeoman greet the user.
@@ -41,16 +49,6 @@ module.exports = class extends Generator {
         default: true
       },
       {
-        when: function(response) {
-          return response.linter === 'none';
-        },
-        type: 'list',
-        name: 'propTypes',
-        message: 'Method of type checking?',
-        default: 'none',
-        choices: ['none', 'propTypes', 'flow', 'typescript']
-      },
-      {
         type: 'confirm',
         name: 'saveAsTemplate',
         message: 'Would you like to save your settings as a template?',
@@ -79,10 +77,14 @@ module.exports = class extends Generator {
         ? this.props.componentType + '.js'
         : this.props.linter + '_' + this.props.componentType + '.js';
 
+    const componentName =
+      typeof this.props.componentName === 'string' && this.props.componentName.length > 0
+        ? formatName(this.props.componentName)
+        : 'TestComponent';
     this.fs.copyTpl(
       this.templatePath(templateName),
-      this.destinationPath(this.props.componentName + '.js'),
-      { componentName: this.props.componentName, jsx: this.props.jsx }
+      this.destinationPath(componentName + '.js'),
+      { componentName: componentName, jsx: this.props.jsx }
     );
   }
 };
