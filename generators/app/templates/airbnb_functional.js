@@ -18,7 +18,6 @@ const <%= componentName %> = () => (
 
 export default <%= componentName %>;
 
-
 Container.propTypes = {
   title: PropTypes.string,
   children: PropTypes.node.isRequired,

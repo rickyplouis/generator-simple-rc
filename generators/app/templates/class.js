@@ -9,20 +9,14 @@ export default class <%= componentName %> extends React.Component {
   }
 <% if(jsx){ %>
   render() {
-    return (
-      <div>
-        {this.state.text}
-      </div>
+    return <div>{this.state.text}</div>;
+  }
+}<% } else{ %>
+  render() {
+    return React.createElement(
+      'div',
+      null,
+      this.state.text
     );
   }
-}
-<% } else{ %>
-   render() {
-     return React.createElement(
-       'div',
-       null,
-       this.state.text
-     );
-   }
- }
-<% } %>
+}<% } %>
