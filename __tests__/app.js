@@ -21,7 +21,7 @@ describe('formatter', () => {
     assert.textEqual(formatter(), 'App');
   });
   it('should handle spaces', () => {
-    assert.textEqual(formatter('hello world'), 'Helloworld');
+    assert.textEqual(formatter('hello world'), 'HelloWorld');
   });
   it('should handle underscore', () => {
     assert.textEqual(formatter('hello_world'), 'HelloWorld');
