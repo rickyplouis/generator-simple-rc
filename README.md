@@ -1,4 +1,4 @@
-# generator-simple-rc [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url] [![Coverage percentage][coveralls-image]][coveralls-url]
+# generator-simple-rc [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [daviddm-url] [![Coverage percentage][coveralls-image]][coveralls-url]
 > A simple react component generator
 
 ## Installation
@@ -16,17 +16,19 @@ Then generate your new project:
 yo simple-rc
 ```
 
-## Getting To Know Yeoman
+## Questions asked during generation
 
- * Yeoman has a heart of gold.
- * Yeoman is a person with feelings and opinions, but is very easy to work with.
- * Yeoman can be too opinionated at times but is easily convinced not to be.
- * Feel free to [learn more about Yeoman](http://yeoman.io/).
+```
+What is the name of your component?
+What type of your component? [class/functional]
+What type of linter will it follow? [none/airbnb]
+Use jsx? [y/N]
+Use es6? [y/N]
+```
 
 ## License
 
 MIT © [Ricardo](https://github.com/rickyplouis)
-
 
 [npm-image]: https://badge.fury.io/js/generator-simple-rc.svg
 [npm-url]: https://npmjs.org/package/generator-simple-rc
