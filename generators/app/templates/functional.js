@@ -42,10 +42,3 @@ ReactDOM.render(
   document.getElementById('root')
 );
 <% } %>
-Welcome.propTypes = {
-  title: PropTypes.string,
-};
-
-Welcome.defaultProps = {
-  title: 'Some Title',
-};
