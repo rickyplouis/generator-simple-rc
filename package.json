@@ -1,6 +1,6 @@
 {
   "name": "generator-simple-rc",
-  "version": "0.0.0",
+  "version": "0.0.2",
   "description": "A simple react component generator",
   "homepage": "https://github.com/rickyplouis/generator-simple-rc",
   "author": {

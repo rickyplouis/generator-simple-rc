@@ -1,4 +1,4 @@
-# generator-simple-rc [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [daviddm-url] [![Coverage percentage][coveralls-image]][coveralls-url]
+# generator-simple-rc [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url][![Coverage percentage][coveralls-image]][coveralls-url]
 > A simple react component generator
 
 ## Installation
