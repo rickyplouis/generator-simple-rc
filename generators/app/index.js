@@ -12,10 +12,6 @@ const formatName = componentName =>
 module.exports = class extends Generator {
   prompting() {
     this.argument('templateName', { type: String, required: false });
-
-    this.option('test');
-    this.option('noJSX');
-    this.option('noES6');
     // This makes `appname` a required argument.
     const prompts = [
       {
@@ -52,7 +48,7 @@ module.exports = class extends Generator {
           return response.linter === 'none';
         },
         type: 'confirm',
-        name: 'ES6',
+        name: 'es6',
         message: 'Use es6?',
         default: true
       }
@@ -67,25 +63,20 @@ module.exports = class extends Generator {
     return this.prompt(prompts).then(props => {
       // To access props later use this.props.someAnswer;
       this.props = props;
-      this.templateName = this.options.templateName;
-      this.noJSX = this.options.noJSX;
-      this.noES6 = this.options.noES6;
-      this.args = this.argument;
     });
   }
 
   writing() {
+    let templateName = '';
     const componentName =
       typeof this.props.componentName === 'string' && this.props.componentName.length > 0
         ? formatName(this.props.componentName)
         : 'TestComponent';
 
     if (!this.options.templateName) {
-      let templateName = '';
-
-      if (this.props.linter) {
+      if (this.props.linter === 'airbnb') {
+        console.log('this.props.linter', this.props.linter);
         templateName += `airbnb_${this.props.componentType}.js`;
-
         return this.fs.copyTpl(
           this.templatePath(templateName),
           this.destinationPath(componentName + '.js'),
@@ -94,16 +85,23 @@ module.exports = class extends Generator {
       }
       // Prepends template name with class or functional
       templateName += this.props.componentType;
-
-      if (this.options.noES6) {
+      if (this.props.es6) {
+        templateName += '.js';
+        console.log('templateName', templateName);
+        this.fs.copyTpl(
+          this.templatePath(templateName),
+          this.destinationPath(componentName + '.js'),
+          { componentName: componentName, jsx: this.props.JSX }
+        );
+      } else {
+        console.log('reachd c');
         templateName += '_no_es6.js';
+        this.fs.copyTpl(
+          this.templatePath(templateName),
+          this.destinationPath(componentName + '.js'),
+          { componentName: componentName, jsx: this.props.JSX }
+        );
       }
-
-      this.fs.copyTpl(
-        this.templatePath(templateName),
-        this.destinationPath(componentName + '.js'),
-        { componentName: componentName, jsx: this.props.JSX, es6: this.props.ES6 }
-      );
     }
   }
 };
